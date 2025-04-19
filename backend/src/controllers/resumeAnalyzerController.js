@@ -33,28 +33,38 @@ export const analyzeResume = async (req, res) => {
         return res.status(400).json({ message: 'Could not extract text from PDF or PDF is empty.' });
     }
 
+    const { jobDescription } = req.body;
+    if (!jobDescription || jobDescription.trim().length === 0) {
+      return res.status(400).json({ message: 'No job description provided.' });
+    }
+
+
 
     // 2. Construct a smart prompt for Gemini (Refined Prompt)
     const prompt = `
-You are a professional resume analyst. Analyze the resume text below and provide structured feedback STRICTLY in the specified JSON format.
+You are a professional resume analyst. Analyze the resume text below in context of the provided Job Description. Your goal is to evaluate how well the resume aligns with the job, and return structured feedback STRICTLY in the specified JSON format.
+
+🔍 Compare the resume with this Job Description (JD):
+"""
+${jobDescription}
+"""
 
 ✅ JSON Fields Required:
 
-- score (integer out of 100)
-- summaryFeedback (string: short summary of the resume quality)
-- skillsFeedback (string: evaluation of technical skills)
-- experienceFeedback (string: evaluation of work experience section)
-- keywordMatches (object with keys: found: string[], missing: string[])
-- suggestions (string[]: specific improvements)
+- score (integer out of 100, based on how well the resume matches the JD)
+- summaryFeedback (string: short summary of the resume quality and match with JD)
+- skillsFeedback (string: evaluation of technical skills and their alignment with JD)
+- experienceFeedback (string: evaluation of work experience section and its relevance to the JD)
+- keywordMatches (object with keys: found: string[] — keywords from JD found in resume, missing: string[] — important keywords from JD missing in resume)
+- suggestions (string[]: specific improvements to better align with the JD)
 
 ➕ Additional Required Sections:
 
 - userInfo (object with fields: name, email, phone, address)
 - skills (array of strings: list of technical and soft skills mentioned in the resume)
 - experienceDetails (array of objects with jobTitle and duration like "Software Engineer", "Jan 2021 – Present")
-- summary (provide the summary form the resume if not exist generate the summary of the resume)
+- summary (if a summary is not explicitly found in the resume, intelligently generate a concise professional summary based on the content)
 - projects (object with fields: projectName, projectDescription, toolsUsed(array of strings), date)
-
 
 🧩 JSON Structure Template (use exactly this structure):
 
@@ -80,7 +90,7 @@ You are a professional resume analyst. Analyze the resume text below and provide
     {
       "jobTitle": "",
       "duration": "",
-      "description ": ""
+      "description": ""
     }
   ],
   "sectionAnalysis": {
