@@ -1,3 +1,5 @@
+
+
 :root {
     --primary: #4f46e5;
     --primary-dark: #4338ca;
@@ -168,7 +170,7 @@ nav {
     border: 1px solid var(--light-gray);
     border-radius: 6px;
     font-size: 1rem;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s; /* Added box-shadow transition */
 }
 
 .form-control:focus {
@@ -176,6 +178,14 @@ nav {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
+
+/* Ensure disabled inputs are visually distinct */
+.form-control:disabled {
+    background-color: #f1f5f9; /* Lighter background */
+    cursor: not-allowed;
+    color: var(--gray);
+}
+
 
 textarea.form-control {
     min-height: 100px;
@@ -194,6 +204,7 @@ textarea.form-control {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     text-align: center;
+    user-select: none; /* Prevent text selection on buttons */
 }
 
 .btn:hover {
@@ -250,22 +261,30 @@ textarea.form-control {
 
 .list-item {
     background-color: #f8fafc;
+    border: 1px solid var(--light-gray); /* Added subtle border */
     border-radius: 6px;
-    padding: 15px;
+    padding: 20px; /* Slightly increased padding */
+    padding-right: 40px; /* Make space for remove button */
     margin-bottom: 15px;
     position: relative;
 }
 
 .remove-item {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 15px; /* Adjusted position */
+    right: 15px;
     background: none;
     border: none;
     color: var(--danger);
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.4rem; /* Slightly larger */
+    line-height: 1; /* Ensure consistent height */
+    padding: 2px; /* Easier to click */
 }
+.remove-item:hover {
+    color: var(--primary-dark); /* Use darker danger color on hover */
+}
+
 
 .add-item-btn {
     display: flex;
@@ -286,6 +305,7 @@ textarea.form-control {
 .add-item-btn:hover {
     border-color: var(--primary);
     color: var(--primary);
+    background-color: #f0f3ff; /* Slight background tint on hover */
 }
 
 .upload-area {
@@ -295,11 +315,13 @@ textarea.form-control {
     text-align: center;
     margin-bottom: 30px;
     transition: all 0.3s;
-    cursor: pointer;
+    background-color: #f8fafc; /* Light background */
 }
 
-.upload-area:hover {
+/* Style for when dragging over */
+.upload-area.dragging {
     border-color: var(--primary);
+    background-color: #eef2ff; /* Primary light shade */
 }
 
 .upload-icon {
@@ -313,8 +335,13 @@ textarea.form-control {
     color: var(--gray);
 }
 
+/* Add margin to the upload button inside the area */
+.upload-area .btn {
+    margin-top: 15px;
+}
+
 .file-input {
-    display: none;
+    display: none; /* Keep hidden */
 }
 
 .preview-container {
@@ -325,75 +352,81 @@ textarea.form-control {
 
 .resume-preview {
     flex: 1;
-    max-width: 60%;
+    max-width: 60%; /* Adjust as needed */
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Softer shadow */
+    border: 1px solid var(--light-gray); /* Subtle border */
     padding: 30px;
     min-height: 500px;
+    overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 .analysis-results {
     flex: 1;
-    max-width: 40%;
+    max-width: 40%; /* Adjust as needed */
 }
 
 .resume-section {
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Slightly more space */
 }
 
 .resume-section-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Slightly smaller title */
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 12px; /* Adjusted spacing */
     color: var(--primary);
     border-bottom: 1px solid var(--light-gray);
-    padding-bottom: 5px;
+    padding-bottom: 6px; /* Adjusted padding */
 }
 
 .resume-item {
-    margin-bottom: 15px;
+    margin-bottom: 18px; /* Spacing between items */
 }
 
 .resume-item-title {
     font-weight: 600;
-    margin-bottom: 5px;
+    font-size: 1rem; /* Standardize font size */
+    margin-bottom: 3px; /* Tighter spacing */
 }
 
 .resume-item-subtitle {
     color: var(--gray);
     font-size: 0.9rem;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .resume-item-date {
     color: var(--gray);
     font-size: 0.85rem;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 }
 
 .resume-item-description {
     font-size: 0.9rem;
+    color: var(--dark); /* Ensure good contrast */
 }
 
 .skills-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px; /* Reduced gap */
 }
 
 .skill-tag {
-    background-color: #e0e7ff;
-    color: var(--primary);
-    padding: 5px 10px;
-    border-radius: 20px;
+    background-color: #eef2ff; /* Lighter primary background */
+    color: var(--primary-dark); /* Darker primary text */
+    padding: 4px 12px; /* Adjusted padding */
+    border-radius: 16px; /* More rounded */
     font-size: 0.85rem;
+    font-weight: 500; /* Medium weight */
 }
 
 .analysis-card {
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Softer shadow */
+    border: 1px solid var(--light-gray); /* Subtle border */
     padding: 20px;
     margin-bottom: 20px;
 }
@@ -408,7 +441,7 @@ textarea.form-control {
 .analysis-score {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px; /* Increased gap */
     margin-bottom: 15px;
 }
 
@@ -422,12 +455,21 @@ textarea.form-control {
     font-size: 1.2rem;
     font-weight: 700;
     color: white;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .score-text {
     font-size: 0.9rem;
     color: var(--gray);
+    line-height: 1.4; /* Improve readability */
 }
+.score-text p {
+    margin-bottom: 5px; /* Space between paragraphs */
+}
+.score-text p:last-child {
+    margin-bottom: 0;
+}
+
 
 .high-score {
     background-color: var(--success);
@@ -447,9 +489,10 @@ textarea.form-control {
 
 .analysis-item {
     display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
+    align-items: flex-start; /* Align items to top */
+    gap: 12px; /* Slightly increased gap */
+    margin-bottom: 12px; /* Adjusted spacing */
+    padding-bottom: 12px;
     border-bottom: 1px solid var(--light-gray);
 }
 
@@ -467,6 +510,8 @@ textarea.form-control {
     justify-content: center;
     border-radius: 50%;
     flex-shrink: 0;
+    margin-top: 1px; /* Align better with text */
+    font-weight: bold; /* Make icons bolder */
 }
 
 .analysis-item-icon.positive {
@@ -486,6 +531,7 @@ textarea.form-control {
 
 .analysis-item-text {
     font-size: 0.9rem;
+    line-height: 1.5; /* Slightly increased line height */
 }
 
 .progress-container {
@@ -494,12 +540,14 @@ textarea.form-control {
     background-color: var(--light-gray);
     border-radius: 4px;
     margin-bottom: 5px;
+    overflow: hidden; /* Ensure bar stays within bounds */
 }
 
 .progress-bar {
     height: 100%;
     border-radius: 4px;
     background-color: var(--primary);
+    transition: width 0.5s ease-in-out; /* Animate width change */
 }
 
 .progress-label {
@@ -516,7 +564,8 @@ textarea.form-control {
 .keyword-item {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
+    align-items: center; /* Vertically align items */
+    padding: 10px 0; /* Increased padding */
     border-bottom: 1px solid var(--light-gray);
 }
 
@@ -526,19 +575,24 @@ textarea.form-control {
 
 .keyword-name {
     font-size: 0.9rem;
+    color: var(--dark);
 }
 
 .keyword-status {
     font-size: 0.85rem;
     font-weight: 600;
+    padding: 3px 8px; /* Add padding for badge-like look */
+    border-radius: 12px; /* Make it pill-shaped */
 }
 
 .keyword-status.found {
     color: var(--success);
+    background-color: rgba(16, 185, 129, 0.1);
 }
 
 .keyword-status.missing {
     color: var(--danger);
+    background-color: rgba(239, 68, 68, 0.1);
 }
 
 .two-columns {
@@ -547,11 +601,7 @@ textarea.form-control {
     gap: 20px;
 }
 
-@media (max-width: 768px) {
-    .two-columns {
-        grid-template-columns: 1fr;
-    }
-
+@media (max-width: 992px) { /* Adjusted breakpoint */
     .preview-container {
         flex-direction: column;
     }
@@ -559,9 +609,39 @@ textarea.form-control {
     .resume-preview, .analysis-results {
         max-width: 100%;
     }
+}
+
+
+@media (max-width: 768px) {
+    .two-columns {
+        grid-template-columns: 1fr;
+    }
 
     .nav-links {
+        /* Consider implementing a mobile menu toggle here */
         display: none;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .tabs {
+        /* Allow tabs to wrap if needed */
+        flex-wrap: wrap;
+    }
+    .tab {
+        padding: 12px 20px;
+    }
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+     .footer-links {
+        justify-content: center;
     }
 }
 
@@ -596,24 +676,36 @@ footer {
 .copyright {
     color: var(--gray);
     font-size: 0.9rem;
+    margin-top: 20px; /* Ensure spacing if footer wraps */
+    text-align: center;
 }
 
 /* Loading animation */
 .loading {
-    display: none;
-    text-align: center;
-    padding: 30px;
+    /* display: none; by default set in HTML */
+    display: flex; /* Use flex for centering */
+    flex-direction: column; /* Stack spinner and text */
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px; /* Adjusted padding */
+    min-height: 200px; /* Ensure it takes some space */
 }
 
 .spinner {
     width: 40px;
     height: 40px;
-    margin: 0 auto 20px;
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: var(--primary);
+    margin-bottom: 20px; /* Changed from margin auto */
+    border: 4px solid rgba(79, 70, 229, 0.2); /* Lighter border color */
+    border-left-color: var(--primary); /* Spinner color */
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
+
+.loading p {
+    color: var(--gray);
+    font-weight: 500;
+}
+
 
 @keyframes spin {
     to {
@@ -635,13 +727,15 @@ footer {
     align-items: center;
     gap: 10px;
     z-index: 1000;
-    transform: translateY(100px);
+    transform: translateX(calc(100% + 20px)); /* Start off-screen right */
     opacity: 0;
-    transition: all 0.3s;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out; /* Smoother transition */
+    min-width: 250px; /* Ensure minimum width */
+    max-width: 400px; /* Prevent overly wide toasts */
 }
 
 .toast.show {
-    transform: translateY(0);
+    transform: translateX(0); /* Slide in */
     opacity: 1;
 }
 
@@ -655,6 +749,7 @@ footer {
 
 .toast-icon {
     font-size: 20px;
+    flex-shrink: 0; /* Prevent icon from shrinking */
 }
 
 .toast-success .toast-icon {
@@ -667,6 +762,7 @@ footer {
 
 .toast-message {
     flex: 1;
+    font-size: 0.95rem; /* Slightly larger message text */
 }
 
 .toast-close {
@@ -675,4 +771,10 @@ footer {
     color: var(--gray);
     cursor: pointer;
     font-size: 18px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
 }
+.toast-close:hover {
+    opacity: 1;
+}
+
