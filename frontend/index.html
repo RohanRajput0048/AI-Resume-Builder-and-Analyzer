@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body> <!-- No class initially -->
     <header>
         <div class="container">
             <nav>
@@ -22,187 +22,194 @@
                     <a href="#analyzer">Resume Analyzer</a>
                     <a href="#about">About</a>
                     <a href="#contact">Contact</a>
+                    <!-- === THEME TOGGLE BUTTON === -->
+                    <button id="theme-toggle-button" class="theme-btn" title="Toggle theme" aria-label="Toggle theme">
+                        <span id="theme-icon">🌙</span> <!-- Start with moon icon (to switch to dark) -->
+                    </button>
+                    <!-- === END THEME TOGGLE BUTTON === -->
                 </div>
             </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Build and Analyze Your Resume with AI</h1>
-            <p>Create a professional resume in minutes or analyze your existing resume to get personalized feedback and improve your chances of landing your dream job.</p>
-            <div class="tabs">
-                <button class="tab active" data-tab="builder">Resume Builder</button>
-                <button class="tab" data-tab="analyzer">Resume Analyzer</button>
-            </div>
-        </div>
-    </section>
-
-    <div class="container">
-        <!-- Resume Builder Tab -->
-        <div class="tab-content active" id="builder-content">
-            <div class="card">
-                <div class="card-header">
-                    <h2>Create Your Professional Resume</h2>
-                    <p>Select a template and fill in the details below.</p>
+    <!-- ... rest of your HTML content ... -->
+     <section class="hero">
+            <div class="container">
+                <h1>Build and Analyze Your Resume with AI</h1>
+                <p>Create a professional resume in minutes or analyze your existing resume to get personalized feedback and improve your chances of landing your dream job.</p>
+                <div class="tabs">
+                    <button class="tab active" data-tab="builder">Resume Builder</button>
+                    <button class="tab" data-tab="analyzer">Resume Analyzer</button>
                 </div>
-
-                <form id="resume-builder-form">
-                    <!-- === TEMPLATE SELECTION === -->
-                    <div class="form-group">
-                        <label for="template-selector">Choose a Template</label>
-                        <select id="template-selector" class="form-control" required>
-                            <option value="modern">Modern</option>
-                            <option value="classic">Classic</option>
-                            <option value="azurill">Azurill</option>
-                            <option value="bhendi">Bhendi</option>
-                            <option value="kd">KD</option>
-                            <!-- Add more templates here if needed -->
-                        </select>
-                    </div>
-
-                    <!-- === DYNAMIC FORM FIELDS CONTAINER === -->
-                    <div id="dynamic-form-fields">
-                        <!-- Fields will be rendered here by JavaScript -->
-                    </div>
-
-                    <!-- === SUBMIT BUTTON === -->
-                    <div class="form-group" style="margin-top: 30px;">
-                        <button type="submit" class="btn btn-block">Generate Resume Preview</button>
-                        <button type="button" class="btn btn-secondary btn-block" id="download-generated-pdf" style="margin-top: 10px; display: none;">Download PDF</button>
-                    </div>
-                </form>
             </div>
+        </section>
 
-            <!-- Resume Preview (initially hidden) -->
-            <div id="resume-preview-section" style="display: none;">
+        <div class="container">
+            <!-- Resume Builder Tab -->
+            <div class="tab-content active" id="builder-content">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Your Resume Preview</h2>
-                        <p>Here's a preview based on the selected template. Review and download.</p>
+                        <h2>Create Your Professional Resume</h2>
+                        <p>Select a template and fill in the details below.</p>
                     </div>
 
-                    <div class="preview-container">
-                        <div class="resume-preview" id="resume-preview">
-                            <!-- Resume preview content will be generated here -->
+                    <form id="resume-builder-form">
+                        <!-- === TEMPLATE SELECTION === -->
+                        <div class="form-group">
+                            <label for="template-selector">Choose a Template</label>
+                            <select id="template-selector" class="form-control" required>
+                                <option value="modern">Modern</option>
+                                <option value="classic">Classic</option>
+                                <option value="azurill">Azurill</option>
+                                <option value="bhendi">Bhendi</option>
+                                <option value="kd">KD</option>
+                                <!-- Add more templates here if needed -->
+                            </select>
                         </div>
 
-                        <div class="analysis-results">
-                            <div class="analysis-card">
-                                <h3 class="analysis-title">Resume Score (Simulated)</h3>
-                                <div class="analysis-score">
-                                    <div class="score-circle high-score" id="builder-score-circle">85</div>
-                                    <div class="score-text" id="builder-score-text">
-                                        <p>Your resume is looking good!</p>
-                                        <p>Here are some suggestions to make it even better.</p>
+                        <!-- === DYNAMIC FORM FIELDS CONTAINER === -->
+                        <div id="dynamic-form-fields">
+                            <!-- Fields will be rendered here by JavaScript -->
+                        </div>
+
+                        <!-- === SUBMIT BUTTON === -->
+                        <div class="form-group" style="margin-top: 30px;">
+                            <button type="submit" class="btn btn-block">Generate Resume Preview</button>
+                            <button type="button" class="btn btn-secondary btn-block" id="download-generated-pdf" style="margin-top: 10px; display: none;">Download PDF</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Resume Preview (initially hidden) -->
+                <div id="resume-preview-section" style="display: none;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Your Resume Preview</h2>
+                            <p>Here's a preview based on the selected template. Review and download.</p>
+                        </div>
+
+                        <div class="preview-container">
+                            <div class="resume-preview" id="resume-preview">
+                                <!-- Resume preview content will be generated here -->
+                            </div>
+
+                            <div class="analysis-results">
+                                <div class="analysis-card">
+                                    <h3 class="analysis-title">Resume Score (Simulated)</h3>
+                                    <div class="analysis-score">
+                                        <div class="score-circle high-score" id="builder-score-circle">85</div>
+                                        <div class="score-text" id="builder-score-text">
+                                            <p>Your resume is looking good!</p>
+                                            <p>Here are some suggestions to make it even better.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="analysis-card">
-                                <h3 class="analysis-title">AI Suggestions (Simulated)</h3>
-                                <div class="analysis-list" id="builder-ai-suggestions">
-                                    <!-- AI suggestions will be generated here -->
+                                <div class="analysis-card">
+                                    <h3 class="analysis-title">AI Suggestions (Simulated)</h3>
+                                    <div class="analysis-list" id="builder-ai-suggestions">
+                                        <!-- AI suggestions will be generated here -->
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- Download button moved inside the form -->
+                                    <button class="btn btn-outline btn-block" style="margin-top: 10px;" id="edit-resume">Edit Resume</button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div class="form-group">
-                                <!-- Download button moved inside the form -->
-                                <button class="btn btn-outline btn-block" style="margin-top: 10px;" id="edit-resume">Edit Resume</button>
+            <!-- Resume Analyzer Tab -->
+            <div class="tab-content" id="analyzer-content">
+                 <!-- ... (Analyzer content remains the same) ... -->
+                 <div class="card">
+                    <div class="card-header">
+                        <h2>Analyze Your Existing Resume</h2>
+                        <p>Upload your resume to get AI-powered feedback and suggestions for improvement.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="job-description">Paste the Job Description</label>
+                        <textarea id="job-description" class="form-control" placeholder="Paste the job description here..." rows="5" required></textarea> <!-- Added required -->
+                    </div>
+
+
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">📄</div>
+                        <p class="upload-text">Drag & drop your resume file here or click to browse</p>
+                        <p class="upload-text">Supported formats: PDF</p> <!-- Simplified supported formats for now -->
+                        <button type="button" class="btn" id="upload-btn">Upload Resume</button> <!-- Changed to button type="button" -->
+                        <input type="file" id="resume-file" class="file-input" accept=".pdf"> <!-- Simplified accept -->
+                    </div>
+
+                    <div class="loading" id="analysis-loading" style="display: none;"> <!-- Added display: none initially -->
+                        <div class="spinner"></div>
+                        <p>Analyzing your resume...</p>
+                    </div>
+
+                    <!-- Analysis Results (initially hidden) -->
+                    <div id="analysis-results-section" style="display: none;">
+                        <div class="preview-container">
+                            <!-- CHANGED: Renamed ID for clarity -->
+                            <div class="resume-preview" id="analyzer-resume-preview">
+                                <!-- Uploaded resume content based on JSON data will be shown here -->
+                            </div>
+
+                            <div class="analysis-results">
+                                <div class="analysis-card">
+                                    <h3 class="analysis-title">Resume Score</h3>
+                                    <div class="analysis-score">
+                                        <!-- CHANGED: Added IDs -->
+                                        <div class="score-circle medium-score" id="analyzer-score-circle">72</div>
+                                        <div class="score-text" id="analyzer-score-text">
+                                            <p>Your resume needs some improvements.</p>
+                                            <p>Check out our suggestions below.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="analysis-card">
+                                    <h3 class="analysis-title">Content Analysis</h3>
+                                    <!-- CHANGED: Added ID to the container, removed static items -->
+                                    <div class="keyword-match" id="analyzer-keyword-matches">
+                                        <p style="margin-bottom: 10px; font-size: 0.9rem;">Job Keyword Matches:</p>
+                                        <!-- Keyword items will be added here -->
+                                    </div>
+                                </div>
+
+                                <div class="analysis-card">
+                                    <h3 class="analysis-title">Section Strength</h3>
+                                    <!-- CHANGED: Added ID to the container, removed static items -->
+                                    <div style="margin-top: 15px;" id="analyzer-section-strength">
+                                        <!-- Section strength bars will be added here -->
+                                    </div>
+                                </div>
+
+                                <div class="analysis-card">
+                                    <h3 class="analysis-title">AI Suggestions</h3>
+                                    <!-- CHANGED: Added ID to the container, removed static items -->
+                                    <div class="analysis-list" id="analyzer-ai-suggestions">
+                                        <!-- AI suggestions will be added here -->
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-block" id="improve-resume">Improve My Resume</button>
+                                    <button class="btn btn-outline btn-block" style="margin-top: 10px;" id="download-analysis">Download Analysis</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Resume Analyzer Tab -->
-        <div class="tab-content" id="analyzer-content">
-             <!-- ... (Analyzer content remains the same) ... -->
-             <div class="card">
-                <div class="card-header">
-                    <h2>Analyze Your Existing Resume</h2>
-                    <p>Upload your resume to get AI-powered feedback and suggestions for improvement.</p>
-                </div>
-
-                <div class="form-group">
-                    <label for="job-description">Paste the Job Description</label>
-                    <textarea id="job-description" class="form-control" placeholder="Paste the job description here..." rows="5" required></textarea> <!-- Added required -->
-                </div>
-
-
-                <div class="upload-area" id="upload-area">
-                    <div class="upload-icon">📄</div>
-                    <p class="upload-text">Drag & drop your resume file here or click to browse</p>
-                    <p class="upload-text">Supported formats: PDF</p> <!-- Simplified supported formats for now -->
-                    <button type="button" class="btn" id="upload-btn">Upload Resume</button> <!-- Changed to button type="button" -->
-                    <input type="file" id="resume-file" class="file-input" accept=".pdf"> <!-- Simplified accept -->
-                </div>
-
-                <div class="loading" id="analysis-loading" style="display: none;"> <!-- Added display: none initially -->
-                    <div class="spinner"></div>
-                    <p>Analyzing your resume...</p>
-                </div>
-
-                <!-- Analysis Results (initially hidden) -->
-                <div id="analysis-results-section" style="display: none;">
-                    <div class="preview-container">
-                        <!-- CHANGED: Renamed ID for clarity -->
-                        <div class="resume-preview" id="analyzer-resume-preview">
-                            <!-- Uploaded resume content based on JSON data will be shown here -->
-                        </div>
-
-                        <div class="analysis-results">
-                            <div class="analysis-card">
-                                <h3 class="analysis-title">Resume Score</h3>
-                                <div class="analysis-score">
-                                    <!-- CHANGED: Added IDs -->
-                                    <div class="score-circle medium-score" id="analyzer-score-circle">72</div>
-                                    <div class="score-text" id="analyzer-score-text">
-                                        <p>Your resume needs some improvements.</p>
-                                        <p>Check out our suggestions below.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="analysis-card">
-                                <h3 class="analysis-title">Content Analysis</h3>
-                                <!-- CHANGED: Added ID to the container, removed static items -->
-                                <div class="keyword-match" id="analyzer-keyword-matches">
-                                    <p style="margin-bottom: 10px; font-size: 0.9rem;">Job Keyword Matches:</p>
-                                    <!-- Keyword items will be added here -->
-                                </div>
-                            </div>
-
-                            <div class="analysis-card">
-                                <h3 class="analysis-title">Section Strength</h3>
-                                <!-- CHANGED: Added ID to the container, removed static items -->
-                                <div style="margin-top: 15px;" id="analyzer-section-strength">
-                                    <!-- Section strength bars will be added here -->
-                                </div>
-                            </div>
-
-                            <div class="analysis-card">
-                                <h3 class="analysis-title">AI Suggestions</h3>
-                                <!-- CHANGED: Added ID to the container, removed static items -->
-                                <div class="analysis-list" id="analyzer-ai-suggestions">
-                                    <!-- AI suggestions will be added here -->
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <button class="btn btn-block" id="improve-resume">Improve My Resume</button>
-                                <button class="btn btn-outline btn-block" style="margin-top: 10px;" id="download-analysis">Download Analysis</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <footer>
-        <div class="container">
+       <!-- ... (Footer remains the same) ... -->
+       <div class="container">
             <div class="footer-content">
                 <div class="logo">
                     <span class="logo-icon">📝</span>

@@ -1,17 +1,95 @@
-
+/* --- START OF style.css --- */
 
 :root {
+    /* Light Mode Colors */
     --primary: #4f46e5;
     --primary-dark: #4338ca;
+    --primary-light: #eef2ff;
     --secondary: #0ea5e9;
-    --dark: #1e293b;
-    --light: #f8fafc;
-    --gray: #64748b;
-    --light-gray: #e2e8f0;
+    --dark: #1e293b; /* Dark text color */
+    --light: #f8fafc; /* Lightest background elements */
+    --gray: #64748b;  /* Muted text */
+    --light-gray: #e2e8f0; /* Borders, dividers */
+    --bg-color: #f1f5f9; /* Main background */
+    --card-bg: white;
+    --text-color: var(--dark);
+    --text-muted: var(--gray);
+    --border-color: var(--light-gray);
+    --input-bg: white;
+    --input-disabled-bg: #f1f5f9;
+    --link-color: var(--primary);
+    --link-hover-color: var(--primary-dark);
+    --shadow-color: rgba(0, 0, 0, 0.1);
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
+    --score-high-bg: var(--success);
+    --score-medium-bg: var(--warning);
+    --score-low-bg: var(--danger);
+    --positive-icon-bg: rgba(16, 185, 129, 0.1);
+    --negative-icon-bg: rgba(239, 68, 68, 0.1);
+    --suggestion-icon-bg: rgba(245, 158, 11, 0.1);
+    --keyword-found-bg: rgba(16, 185, 129, 0.1);
+    --keyword-missing-bg: rgba(239, 68, 68, 0.1);
+    --skill-tag-bg: var(--primary-light);
+    --skill-tag-text: var(--primary-dark);
+    --upload-area-bg: #f8fafc;
+    --upload-area-dragging-bg: var(--primary-light);
+    --add-btn-hover-bg: #f0f3ff;
+    --toast-bg: white;
+    --toast-text: var(--dark);
+    --toast-shadow: rgba(0, 0, 0, 0.15);
+    --header-bg: white;
+    --header-shadow: rgba(0, 0, 0, 0.1);
 }
+
+body.dark-mode {
+    /* Dark Mode Colors */
+    --primary: #6366f1; /* Slightly lighter primary for dark */
+    --primary-dark: #818cf8;
+    --primary-light: #3730a3; /* Darker shade for light elements */
+    --secondary: #38bdf8;
+    --dark: #f8fafc; /* Light text color */
+    --light: #1e293b; /* Darkest background elements */
+    --gray: #94a3b8;  /* Lighter muted text */
+    --light-gray: #475569; /* Darker borders */
+    --bg-color: #1e293b; /* Main background */
+    --card-bg: #334155; /* Darker card */
+    --text-color: #f8fafc; /* Light text */
+    --text-muted: var(--gray);
+    --border-color: var(--light-gray);
+    --input-bg: #475569; /* Dark input */
+    --input-disabled-bg: #334155;
+    --link-color: var(--secondary); /* Use secondary for links? */
+    --link-hover-color: #7dd3fc;
+    --shadow-color: rgba(0, 0, 0, 0.4); /* Darker shadow */
+    --success: #34d399;
+    --warning: #facc15;
+    --danger: #f87171;
+    --score-high-bg: var(--success);
+    --score-medium-bg: var(--warning);
+    --score-low-bg: var(--danger);
+    --positive-icon-bg: rgba(52, 211, 153, 0.2);
+    --negative-icon-bg: rgba(248, 113, 113, 0.2);
+    --suggestion-icon-bg: rgba(250, 204, 21, 0.2);
+    --keyword-found-bg: rgba(52, 211, 153, 0.2);
+    --keyword-missing-bg: rgba(248, 113, 113, 0.2);
+    --skill-tag-bg: var(--primary-light);
+    --skill-tag-text: #c7d2fe; /* Lighter text for dark tag */
+    --upload-area-bg: #334155;
+    --upload-area-dragging-bg: #4338ca; /* Darker primary */
+    --add-btn-hover-bg: #334155;
+    --toast-bg: #334155; /* Dark toast */
+    --toast-text: var(--text-color);
+    --toast-shadow: rgba(0, 0, 0, 0.5);
+    --header-bg: #334155; /* Dark header */
+    --header-shadow: rgba(0, 0, 0, 0.3);
+
+    /* Adjust spinner for dark mode */
+    --spinner-border-color: rgba(248, 250, 252, 0.3); /* Lighter transparent border */
+    --spinner-active-color: var(--secondary); /* Use secondary */
+}
+
 
 * {
     margin: 0;
@@ -21,9 +99,10 @@
 }
 
 body {
-    background-color: #f1f5f9;
-    color: var(--dark);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
 .container {
@@ -33,11 +112,12 @@ body {
 }
 
 header {
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--header-bg);
+    box-shadow: 0 2px 10px var(--header-shadow);
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 nav {
@@ -53,7 +133,7 @@ nav {
     gap: 10px;
     font-size: 24px;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--primary); /* Logo keeps primary color */
 }
 
 .logo-icon {
@@ -62,19 +142,42 @@ nav {
 
 .nav-links {
     display: flex;
+    align-items: center; /* Align button vertically */
     gap: 30px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: var(--dark);
+    color: var(--text-color);
     font-weight: 500;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: var(--primary);
+    color: var(--link-hover-color);
 }
+
+/* Theme Toggle Button Styling */
+.theme-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1.5rem; /* Adjust icon size */
+    padding: 5px;
+    line-height: 1; /* Prevent extra space */
+    border-radius: 50%;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.theme-btn:hover {
+    color: var(--primary); /* Highlight on hover */
+    background-color: rgba(128, 128, 128, 0.1); /* Subtle background */
+}
+.theme-btn #theme-icon {
+    display: block; /* Prevents layout shifts */
+}
+
 
 .hero {
     padding: 60px 0;
@@ -84,12 +187,12 @@ nav {
 .hero h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    color: var(--dark);
+    color: var(--text-color);
 }
 
 .hero p {
     font-size: 1.2rem;
-    color: var(--gray);
+    color: var(--text-muted);
     max-width: 700px;
     margin: 0 auto 30px;
 }
@@ -98,7 +201,7 @@ nav {
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
-    border-bottom: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .tab {
@@ -110,7 +213,7 @@ nav {
     border-bottom: 3px solid transparent;
     cursor: pointer;
     transition: all 0.3s;
-    color: var(--gray);
+    color: var(--text-muted);
 }
 
 .tab.active {
@@ -119,8 +222,8 @@ nav {
 }
 
 .tab:hover:not(.active) {
-    color: var(--dark);
-    border-bottom: 3px solid var(--light-gray);
+    color: var(--text-color);
+    border-bottom: 3px solid var(--border-color);
 }
 
 .tab-content {
@@ -132,11 +235,13 @@ nav {
 }
 
 .card {
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--shadow-color);
     padding: 30px;
     margin-bottom: 30px;
+    border: 1px solid var(--border-color); /* Add subtle border */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .card-header {
@@ -145,12 +250,12 @@ nav {
 
 .card-header h2 {
     font-size: 1.5rem;
-    color: var(--dark);
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
 .card-header p {
-    color: var(--gray);
+    color: var(--text-muted);
 }
 
 .form-group {
@@ -161,29 +266,32 @@ nav {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: var(--dark);
+    color: var(--text-color);
 }
 
 .form-control {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg); /* Use variable */
+    color: var(--text-color); /* Use variable */
     border-radius: 6px;
     font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s; /* Added box-shadow transition */
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s, color 0.3s;
 }
 
 .form-control:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    box-shadow: 0 0 0 3px var(--primary-light); /* Adjust shadow color based on theme potentially? */
 }
 
 /* Ensure disabled inputs are visually distinct */
 .form-control:disabled {
-    background-color: #f1f5f9; /* Lighter background */
+    background-color: var(--input-disabled-bg); /* Use variable */
     cursor: not-allowed;
-    color: var(--gray);
+    color: var(--text-muted); /* Use muted text color */
+    border-color: var(--border-color); /* Use standard border color */
 }
 
 
@@ -196,7 +304,7 @@ textarea.form-control {
     display: inline-block;
     padding: 12px 24px;
     background-color: var(--primary);
-    color: white;
+    color: white; /* Keep button text white usually */
     border: none;
     border-radius: 6px;
     font-size: 1rem;
@@ -220,16 +328,16 @@ textarea.form-control {
 
 .btn-outline:hover {
     background-color: var(--primary);
-    color: white;
+    color: white; /* Text becomes white on hover fill */
 }
 
 .btn-secondary {
     background-color: var(--secondary);
 }
+/* Adjust secondary hover for dark mode if needed */
+body:not(.dark-mode) .btn-secondary:hover { background-color: #0284c7; }
+body.dark-mode .btn-secondary:hover { background-color: #0ea5e9; } /* Example adjustment */
 
-.btn-secondary:hover {
-    background-color: #0284c7;
-}
 
 .btn-block {
     display: block;
@@ -241,7 +349,7 @@ textarea.form-control {
     padding-bottom: 10px;
     margin-bottom: 20px;
     font-size: 1.2rem;
-    color: var(--dark);
+    color: var(--text-color);
     font-weight: 600;
 }
 
@@ -260,29 +368,31 @@ textarea.form-control {
 }
 
 .list-item {
-    background-color: #f8fafc;
-    border: 1px solid var(--light-gray); /* Added subtle border */
+    background-color: var(--bg-color); /* Use main bg, slightly different from card */
+    border: 1px solid var(--border-color); /* Use variable */
     border-radius: 6px;
-    padding: 20px; /* Slightly increased padding */
-    padding-right: 40px; /* Make space for remove button */
+    padding: 20px;
+    padding-right: 40px;
     margin-bottom: 15px;
     position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .remove-item {
     position: absolute;
-    top: 15px; /* Adjusted position */
+    top: 15px;
     right: 15px;
     background: none;
     border: none;
     color: var(--danger);
     cursor: pointer;
-    font-size: 1.4rem; /* Slightly larger */
-    line-height: 1; /* Ensure consistent height */
-    padding: 2px; /* Easier to click */
+    font-size: 1.4rem;
+    line-height: 1;
+    padding: 2px;
+    transition: color 0.3s ease;
 }
 .remove-item:hover {
-    color: var(--primary-dark); /* Use darker danger color on hover */
+    color: var(--primary-dark); /* Consistent hover */
 }
 
 
@@ -291,8 +401,8 @@ textarea.form-control {
     align-items: center;
     gap: 8px;
     background: none;
-    border: 2px dashed var(--light-gray);
-    color: var(--gray);
+    border: 2px dashed var(--border-color); /* Use variable */
+    color: var(--text-muted); /* Use variable */
     padding: 12px;
     border-radius: 6px;
     width: 100%;
@@ -305,43 +415,41 @@ textarea.form-control {
 .add-item-btn:hover {
     border-color: var(--primary);
     color: var(--primary);
-    background-color: #f0f3ff; /* Slight background tint on hover */
+    background-color: var(--add-btn-hover-bg); /* Use variable */
 }
 
 .upload-area {
-    border: 2px dashed var(--light-gray);
+    border: 2px dashed var(--border-color); /* Use variable */
     border-radius: 10px;
     padding: 40px;
     text-align: center;
     margin-bottom: 30px;
     transition: all 0.3s;
-    background-color: #f8fafc; /* Light background */
+    background-color: var(--upload-area-bg); /* Use variable */
 }
 
-/* Style for when dragging over */
 .upload-area.dragging {
     border-color: var(--primary);
-    background-color: #eef2ff; /* Primary light shade */
+    background-color: var(--upload-area-dragging-bg); /* Use variable */
 }
 
 .upload-icon {
     font-size: 48px;
-    color: var(--gray);
+    color: var(--text-muted); /* Use variable */
     margin-bottom: 15px;
 }
 
 .upload-text {
     margin-bottom: 15px;
-    color: var(--gray);
+    color: var(--text-muted); /* Use variable */
 }
 
-/* Add margin to the upload button inside the area */
 .upload-area .btn {
     margin-top: 15px;
 }
 
 .file-input {
-    display: none; /* Keep hidden */
+    display: none;
 }
 
 .preview-container {
@@ -352,96 +460,107 @@ textarea.form-control {
 
 .resume-preview {
     flex: 1;
-    max-width: 60%; /* Adjust as needed */
-    background-color: white;
+    max-width: 60%;
+    background-color: var(--card-bg); /* Use variable */
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Softer shadow */
-    border: 1px solid var(--light-gray); /* Subtle border */
+    box-shadow: 0 4px 6px var(--shadow-color); /* Use variable */
+    border: 1px solid var(--border-color); /* Use variable */
     padding: 30px;
     min-height: 500px;
-    overflow-y: auto; /* Allow scrolling if content overflows */
+    overflow-y: auto;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .analysis-results {
     flex: 1;
-    max-width: 40%; /* Adjust as needed */
+    max-width: 40%;
 }
 
 .resume-section {
-    margin-bottom: 25px; /* Slightly more space */
+    margin-bottom: 25px;
 }
 
 .resume-section-title {
-    font-size: 1.1rem; /* Slightly smaller title */
+    font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 12px; /* Adjusted spacing */
-    color: var(--primary);
-    border-bottom: 1px solid var(--light-gray);
-    padding-bottom: 6px; /* Adjusted padding */
+    margin-bottom: 12px;
+    color: var(--primary); /* Section titles stand out */
+    border-bottom: 1px solid var(--border-color); /* Use variable */
+    padding-bottom: 6px;
 }
 
 .resume-item {
-    margin-bottom: 18px; /* Spacing between items */
+    margin-bottom: 18px;
 }
 
 .resume-item-title {
     font-weight: 600;
-    font-size: 1rem; /* Standardize font size */
-    margin-bottom: 3px; /* Tighter spacing */
+    font-size: 1rem;
+    margin-bottom: 3px;
+    color: var(--text-color); /* Ensure readable */
 }
 
-.resume-item-subtitle {
-    color: var(--gray);
+.resume-item-subtitle,
+.resume-item-date {
+    color: var(--text-muted); /* Use variable */
     font-size: 0.9rem;
     margin-bottom: 4px;
 }
 
 .resume-item-date {
-    color: var(--gray);
     font-size: 0.85rem;
     margin-bottom: 6px;
 }
 
 .resume-item-description {
     font-size: 0.9rem;
-    color: var(--dark); /* Ensure good contrast */
+    color: var(--text-color); /* Use variable */
+}
+.resume-item-description ul {
+    margin-top: 5px;
+    padding-left: 20px;
+    list-style: disc;
+}
+.resume-item-description li {
+     margin-bottom: 3px;
 }
 
 .skills-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px; /* Reduced gap */
+    gap: 8px;
 }
 
 .skill-tag {
-    background-color: #eef2ff; /* Lighter primary background */
-    color: var(--primary-dark); /* Darker primary text */
-    padding: 4px 12px; /* Adjusted padding */
-    border-radius: 16px; /* More rounded */
+    background-color: var(--skill-tag-bg); /* Use variable */
+    color: var(--skill-tag-text); /* Use variable */
+    padding: 4px 12px;
+    border-radius: 16px;
     font-size: 0.85rem;
-    font-weight: 500; /* Medium weight */
+    font-weight: 500;
 }
 
 .analysis-card {
-    background-color: white;
+    background-color: var(--card-bg); /* Use variable */
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Softer shadow */
-    border: 1px solid var(--light-gray); /* Subtle border */
+    box-shadow: 0 4px 6px var(--shadow-color); /* Use variable */
+    border: 1px solid var(--border-color); /* Use variable */
     padding: 20px;
     margin-bottom: 20px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .analysis-title {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 15px;
-    color: var(--dark);
+    color: var(--text-color);
 }
 
 .analysis-score {
     display: flex;
     align-items: center;
-    gap: 15px; /* Increased gap */
+    gap: 15px;
     margin-bottom: 15px;
 }
 
@@ -454,34 +573,26 @@ textarea.form-control {
     justify-content: center;
     font-size: 1.2rem;
     font-weight: 700;
-    color: white;
-    flex-shrink: 0; /* Prevent shrinking */
+    color: white; /* Keep score text white */
+    flex-shrink: 0;
 }
 
 .score-text {
     font-size: 0.9rem;
-    color: var(--gray);
-    line-height: 1.4; /* Improve readability */
+    color: var(--text-muted); /* Use variable */
+    line-height: 1.4;
 }
 .score-text p {
-    margin-bottom: 5px; /* Space between paragraphs */
+    margin-bottom: 5px;
 }
 .score-text p:last-child {
     margin-bottom: 0;
 }
 
 
-.high-score {
-    background-color: var(--success);
-}
-
-.medium-score {
-    background-color: var(--warning);
-}
-
-.low-score {
-    background-color: var(--danger);
-}
+.high-score { background-color: var(--score-high-bg); }
+.medium-score { background-color: var(--score-medium-bg); }
+.low-score { background-color: var(--score-low-bg); }
 
 .analysis-list {
     margin-top: 15px;
@@ -489,11 +600,11 @@ textarea.form-control {
 
 .analysis-item {
     display: flex;
-    align-items: flex-start; /* Align items to top */
-    gap: 12px; /* Slightly increased gap */
-    margin-bottom: 12px; /* Adjusted spacing */
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
     padding-bottom: 12px;
-    border-bottom: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--border-color); /* Use variable */
 }
 
 .analysis-item:last-child {
@@ -510,51 +621,41 @@ textarea.form-control {
     justify-content: center;
     border-radius: 50%;
     flex-shrink: 0;
-    margin-top: 1px; /* Align better with text */
-    font-weight: bold; /* Make icons bolder */
+    margin-top: 1px;
+    font-weight: bold;
 }
 
-.analysis-item-icon.positive {
-    background-color: rgba(16, 185, 129, 0.1);
-    color: var(--success);
-}
-
-.analysis-item-icon.negative {
-    background-color: rgba(239, 68, 68, 0.1);
-    color: var(--danger);
-}
-
-.analysis-item-icon.suggestion {
-    background-color: rgba(245, 158, 11, 0.1);
-    color: var(--warning);
-}
+.analysis-item-icon.positive { background-color: var(--positive-icon-bg); color: var(--success); }
+.analysis-item-icon.negative { background-color: var(--negative-icon-bg); color: var(--danger); }
+.analysis-item-icon.suggestion { background-color: var(--suggestion-icon-bg); color: var(--warning); }
 
 .analysis-item-text {
     font-size: 0.9rem;
-    line-height: 1.5; /* Slightly increased line height */
+    line-height: 1.5;
+    color: var(--text-color); /* Ensure text is readable */
 }
 
 .progress-container {
     width: 100%;
     height: 8px;
-    background-color: var(--light-gray);
+    background-color: var(--border-color); /* Use border color as background */
     border-radius: 4px;
     margin-bottom: 5px;
-    overflow: hidden; /* Ensure bar stays within bounds */
+    overflow: hidden;
 }
 
 .progress-bar {
     height: 100%;
     border-radius: 4px;
     background-color: var(--primary);
-    transition: width 0.5s ease-in-out; /* Animate width change */
+    transition: width 0.5s ease-in-out;
 }
 
 .progress-label {
     display: flex;
     justify-content: space-between;
     font-size: 0.85rem;
-    color: var(--gray);
+    color: var(--text-muted); /* Use variable */
 }
 
 .keyword-match {
@@ -564,9 +665,9 @@ textarea.form-control {
 .keyword-item {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Vertically align items */
-    padding: 10px 0; /* Increased padding */
-    border-bottom: 1px solid var(--light-gray);
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color); /* Use variable */
 }
 
 .keyword-item:last-child {
@@ -575,25 +676,18 @@ textarea.form-control {
 
 .keyword-name {
     font-size: 0.9rem;
-    color: var(--dark);
+    color: var(--text-color);
 }
 
 .keyword-status {
     font-size: 0.85rem;
     font-weight: 600;
-    padding: 3px 8px; /* Add padding for badge-like look */
-    border-radius: 12px; /* Make it pill-shaped */
+    padding: 3px 8px;
+    border-radius: 12px;
 }
 
-.keyword-status.found {
-    color: var(--success);
-    background-color: rgba(16, 185, 129, 0.1);
-}
-
-.keyword-status.missing {
-    color: var(--danger);
-    background-color: rgba(239, 68, 68, 0.1);
-}
+.keyword-status.found { color: var(--success); background-color: var(--keyword-found-bg); }
+.keyword-status.missing { color: var(--danger); background-color: var(--keyword-missing-bg); }
 
 .two-columns {
     display: grid;
@@ -601,7 +695,7 @@ textarea.form-control {
     gap: 20px;
 }
 
-@media (max-width: 992px) { /* Adjusted breakpoint */
+@media (max-width: 992px) {
     .preview-container {
         flex-direction: column;
     }
@@ -617,10 +711,15 @@ textarea.form-control {
         grid-template-columns: 1fr;
     }
 
+    /* Consider implementing a mobile menu toggle instead of just hiding */
     .nav-links {
-        /* Consider implementing a mobile menu toggle here */
-        display: none;
+        /* Adjust gap or implement mobile menu */
+         gap: 15px;
     }
+    .nav-links a {
+        /* Maybe hide text links on small screens if menu implemented */
+    }
+
 
     .hero h1 {
         font-size: 2rem;
@@ -629,7 +728,6 @@ textarea.form-control {
         font-size: 1rem;
     }
     .tabs {
-        /* Allow tabs to wrap if needed */
         flex-wrap: wrap;
     }
     .tab {
@@ -646,10 +744,11 @@ textarea.form-control {
 }
 
 footer {
-    background-color: white;
+    background-color: var(--header-bg); /* Match header */
     padding: 40px 0;
     margin-top: 60px;
-    border-top: 1px solid var(--light-gray);
+    border-top: 1px solid var(--border-color); /* Use variable */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .footer-content {
@@ -664,45 +763,44 @@ footer {
 }
 
 .footer-links a {
-    color: var(--gray);
+    color: var(--text-muted); /* Use variable */
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .footer-links a:hover {
-    color: var(--primary);
+    color: var(--link-hover-color); /* Use variable */
 }
 
 .copyright {
-    color: var(--gray);
+    color: var(--text-muted); /* Use variable */
     font-size: 0.9rem;
-    margin-top: 20px; /* Ensure spacing if footer wraps */
+    margin-top: 20px;
     text-align: center;
 }
 
 /* Loading animation */
 .loading {
-    /* display: none; by default set in HTML */
-    display: flex; /* Use flex for centering */
-    flex-direction: column; /* Stack spinner and text */
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px; /* Adjusted padding */
-    min-height: 200px; /* Ensure it takes some space */
+    padding: 40px 20px;
+    min-height: 200px;
 }
 
 .spinner {
     width: 40px;
     height: 40px;
-    margin-bottom: 20px; /* Changed from margin auto */
-    border: 4px solid rgba(79, 70, 229, 0.2); /* Lighter border color */
-    border-left-color: var(--primary); /* Spinner color */
+    margin-bottom: 20px;
+    border: 4px solid var(--spinner-border-color, rgba(79, 70, 229, 0.2)); /* Use variable */
+    border-left-color: var(--spinner-active-color, var(--primary)); /* Use variable */
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
 
 .loading p {
-    color: var(--gray);
+    color: var(--text-muted); /* Use variable */
     font-weight: 500;
 }
 
@@ -718,57 +816,47 @@ footer {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: white;
-    color: var(--dark);
+    background-color: var(--toast-bg); /* Use variable */
+    color: var(--toast-text); /* Use variable */
     padding: 15px 20px;
     border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px var(--toast-shadow); /* Use variable */
     display: flex;
     align-items: center;
     gap: 10px;
     z-index: 1000;
-    transform: translateX(calc(100% + 20px)); /* Start off-screen right */
+    transform: translateX(calc(100% + 20px));
     opacity: 0;
-    transition: transform 0.4s ease-out, opacity 0.4s ease-out; /* Smoother transition */
-    min-width: 250px; /* Ensure minimum width */
-    max-width: 400px; /* Prevent overly wide toasts */
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out, background-color 0.3s ease, color 0.3s ease;
+    min-width: 250px;
+    max-width: 400px;
 }
 
 .toast.show {
-    transform: translateX(0); /* Slide in */
+    transform: translateX(0);
     opacity: 1;
 }
 
-.toast-success {
-    border-left: 4px solid var(--success);
-}
-
-.toast-error {
-    border-left: 4px solid var(--danger);
-}
+.toast-success { border-left: 4px solid var(--success); }
+.toast-error { border-left: 4px solid var(--danger); }
 
 .toast-icon {
     font-size: 20px;
-    flex-shrink: 0; /* Prevent icon from shrinking */
+    flex-shrink: 0;
 }
 
-.toast-success .toast-icon {
-    color: var(--success);
-}
-
-.toast-error .toast-icon {
-    color: var(--danger);
-}
+.toast-success .toast-icon { color: var(--success); }
+.toast-error .toast-icon { color: var(--danger); }
 
 .toast-message {
     flex: 1;
-    font-size: 0.95rem; /* Slightly larger message text */
+    font-size: 0.95rem;
 }
 
 .toast-close {
     background: none;
     border: none;
-    color: var(--gray);
+    color: var(--text-muted); /* Use variable */
     cursor: pointer;
     font-size: 18px;
     opacity: 0.7;
@@ -778,3 +866,5 @@ footer {
     opacity: 1;
 }
 
+
+/* --- END OF style.css --- */
