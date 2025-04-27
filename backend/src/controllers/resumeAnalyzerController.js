@@ -106,7 +106,7 @@ ${resumeText}
     "phone": "",
     "address": "" /* Extract if present, otherwise "" */
   },
-  "summary": "", /* Extracted summary section, or generate a 1-2 sentence summary if missing */
+  "summary": "", /* Extracted summary section, or generate a summary if missing */
   "skills": [], /* Array of all skills mentioned in the resume */
   "experienceDetails": [ /* Array of distinct job experiences */
     {
@@ -142,6 +142,7 @@ IMPORTANT INSTRUCTIONS:
 - The entire response MUST start directly with '{' and end perfectly with '}'. Ensure it's valid JSON.
 - Populate ALL fields in the template. Use "" or [] for missing data. Do not omit keys.
 - **Extract ALL distinct projects mentioned in the resume into the "projects" array.**
+- Extract the summary form the resume uploaded or generate a summary if not present.
 `;
 
 
