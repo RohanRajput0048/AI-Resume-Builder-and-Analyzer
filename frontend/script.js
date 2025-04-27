@@ -10,9 +10,11 @@ tabs.forEach(tab => {
         const tabId = tab.getAttribute('data-tab');
         if (!tabId) return; // Safety check
 
+        // Remove active class from all tabs and content
         tabs.forEach(t => t.classList.remove('active'));
         tabContents.forEach(c => c.classList.remove('active'));
 
+        // Add active class to the clicked tab and corresponding content
         tab.classList.add('active');
         const contentElement = document.getElementById(`${tabId}-content`);
         if (contentElement) {
@@ -24,7 +26,75 @@ tabs.forEach(tab => {
 });
 
 
+// --- Navigation Link Tab Switching ---
+// Select the navigation links in the header
+const navLinkBuilder = document.querySelector('.nav-links a[href="#builder"]');
+const navLinkAnalyzer = document.querySelector('.nav-links a[href="#analyzer"]');
+
+// Select the corresponding tab buttons below the hero
+const tabButtonBuilder = document.querySelector('.tab[data-tab="builder"]');
+const tabButtonAnalyzer = document.querySelector('.tab[data-tab="analyzer"]');
+
+// Helper function to activate a tab via its button
+function activateTabByButton(targetTabButton) {
+    if (targetTabButton && !targetTabButton.classList.contains('active')) {
+        // Trigger the click event on the corresponding tab button
+        // This reuses the existing tab switching logic
+        targetTabButton.click();
+
+        // Optional: Smooth scroll to the content area after switching
+        const contentId = targetTabButton.getAttribute('data-tab') + '-content';
+        const contentElement = document.getElementById(contentId);
+        if (contentElement) {
+            // Calculate offset considering potential sticky header height (adjust 80 if needed)
+            const headerOffset = 80;
+            const elementPosition = contentElement.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+    } else if (targetTabButton && targetTabButton.classList.contains('active')) {
+         // If already active, just scroll to it
+         const contentId = targetTabButton.getAttribute('data-tab') + '-content';
+         const contentElement = document.getElementById(contentId);
+         if (contentElement) {
+             const headerOffset = 80;
+             const elementPosition = contentElement.getBoundingClientRect().top + window.pageYOffset;
+             const offsetPosition = elementPosition - headerOffset;
+             window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+         }
+    }
+}
+
+
+// Add event listener for the "Resume Builder" nav link
+if (navLinkBuilder && tabButtonBuilder) {
+    navLinkBuilder.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent the default anchor tag behavior (jumping to #builder)
+        console.log("Builder nav link clicked, activating builder tab.");
+        activateTabByButton(tabButtonBuilder);
+    });
+} else {
+    console.warn("Builder nav link or tab button not found.");
+}
+
+// Add event listener for the "Resume Analyzer" nav link
+if (navLinkAnalyzer && tabButtonAnalyzer) {
+    navLinkAnalyzer.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent the default anchor tag behavior (jumping to #analyzer)
+        console.log("Analyzer nav link clicked, activating analyzer tab.");
+        activateTabByButton(tabButtonAnalyzer);
+    });
+} else {
+    console.warn("Analyzer nav link or tab button not found.");
+}
+
+
 // --- Theme Switching Logic ---
+// ... (rest of your theme switching code) ...
 const themeToggleButton = document.getElementById('theme-toggle-button');
 const themeIcon = document.getElementById('theme-icon');
 const bodyElement = document.body;
@@ -72,6 +142,7 @@ function initializeTheme() {
 
 
 // --- Helper: Set Nested Object Property ---
+// ... (rest of your setNestedValue function) ...
 function setNestedValue(obj, path, value) {
     const keys = path.split('.');
     let current = obj;
@@ -108,6 +179,7 @@ function setNestedValue(obj, path, value) {
 
 
 // --- Helper: Get Nested Object Property ---
+// ... (rest of your getNestedValue function) ...
 function getNestedValue(obj, path) {
     if (!obj || typeof path !== 'string') return undefined; // Basic safety checks
     const keys = path.split('.');
@@ -130,6 +202,7 @@ function getNestedValue(obj, path) {
 
 
 // --- Template Field Definitions ---
+// ... (rest of your templateFieldConfigs object) ...
 const templateFieldConfigs = {
     modern: [
         { path: 'name', label: 'Full Name', type: 'text', required: true },
@@ -206,6 +279,7 @@ const templateFieldConfigs = {
 };
 
 // --- Dynamic List Item Creators ---
+// ... (rest of your dynamicListItemTemplates object) ...
 const dynamicListItemTemplates = {
     // Modern/Classic/Azurill use similar simple structures
     educationModern: [{ path: 'degree', label: 'Degree', type: 'text', placeholder: 'B.Sc. Computer Science' }, { path: 'institution', label: 'Institution', type: 'text', placeholder: 'University Name' }, { path: 'duration', label: 'Year or Duration', type: 'text', placeholder: '2018-2022 or 2022' }, ],
@@ -225,7 +299,8 @@ const dynamicListItemTemplates = {
     miscKd: [{ path: 'title', label: 'Title (e.g., Award, Achievement)', type: 'text' }, { path: 'desc', label: 'Description', type: 'text' }, { path: 'year', label: 'Year', type: 'text' }, ]
 };
 
-
+// --- Create List Item HTML ---
+// ... (rest of your createListItemHTML function) ...
 function createListItemHTML(fields, listType, basePath, index) {
     const item = document.createElement('div');
     item.className = 'list-item';
@@ -263,6 +338,7 @@ function createListItemHTML(fields, listType, basePath, index) {
 
 
 // --- Render Dynamic Form Fields ---
+// ... (rest of your renderDynamicFormFields function) ...
 const dynamicFieldsContainer = document.getElementById('dynamic-form-fields');
 const templateSelector = document.getElementById('template-selector');
 
@@ -329,6 +405,7 @@ function renderDynamicFormFields(templateName) {
 }
 
 // --- Event Listener for Template Selector ---
+// ... (rest of your template selector listener) ...
 if (templateSelector) {
     templateSelector.addEventListener('change', (e) => {
         renderDynamicFormFields(e.target.value);
@@ -341,6 +418,7 @@ if (templateSelector) {
 }
 
 // --- Event Delegation for Adding Dynamic List Items ---
+// ... (rest of your add item listener) ...
 if (dynamicFieldsContainer) {
     dynamicFieldsContainer.addEventListener('click', function(e) {
         // Use closest to handle clicks on the button or its children (like the span)
@@ -365,6 +443,7 @@ if (dynamicFieldsContainer) {
 
 
 // --- Resume Builder Form Submission (Preview & Prepare for PDF) ---
+// ... (rest of your builder form submission code) ...
 const builderForm = document.getElementById('resume-builder-form');
 const previewSection = document.getElementById('resume-preview-section');
 const previewContainer = document.getElementById('resume-preview');
@@ -410,6 +489,7 @@ if (builderForm) {
 }
 
 // --- Collect Form Data based on Dynamic Fields ---
+// ... (rest of your collectFormData function) ...
 function collectFormData() {
     if (!templateSelector || !dynamicFieldsContainer) {
         console.error("Cannot collect data: Template selector or dynamic fields container missing.");
@@ -507,6 +587,7 @@ function collectFormData() {
 
 
 // --- Generate Resume Preview HTML (Adapted for Dynamic Data) ---
+// ... (rest of your generateResumePreview function) ...
 function generateResumePreview(data) {
     if (!previewContainer || !data) {
         console.error("Preview container or data missing");
@@ -727,6 +808,7 @@ function generateResumePreview(data) {
 
 
 // --- Populate Builder Analysis (Simulated) ---
+// ... (rest of your populateBuilderAnalysis function) ...
 function populateBuilderAnalysis() {
     const suggestionsContainer = document.getElementById('builder-ai-suggestions');
     if (!suggestionsContainer) return;
@@ -763,6 +845,7 @@ function populateBuilderAnalysis() {
 }
 
 // --- PDF Download Button Action (Builder Section) ---
+// ... (rest of your PDF download code) ...
 if (downloadPdfButton) {
     downloadPdfButton.addEventListener('click', async () => {
         if (!currentResumeData) {
@@ -841,6 +924,7 @@ if (downloadPdfButton) {
 
 
 // --- Resume Analyzer Logic ---
+// ... (rest of your analyzer logic: uploadArea, fileInput, handleFileUpload, etc.) ...
 const uploadArea = document.getElementById('upload-area');
 const fileInput = document.getElementById('resume-file');
 const uploadButton = document.getElementById('upload-btn');
@@ -969,6 +1053,7 @@ async function handleFileUpload(file) {
 
 
 // --- Render Analysis Results (Right Side - Analyzer) ---
+// ... (rest of your renderAnalysisResults function) ...
 function renderAnalysisResults(analysisData) {
     console.log("Inside renderAnalysisResults");
     if (!analysisData) return;
@@ -1055,6 +1140,7 @@ function renderAnalysisResults(analysisData) {
 }
 
 // Helper for rendering strength bars (Analyzer)
+// ... (rest of your renderStrengthBar function) ...
 function renderStrengthBar(container, key, scoreValue) {
     const label = getSectionStrengthLabel(scoreValue);
     // Simple camelCase to Title Case conversion
@@ -1074,6 +1160,7 @@ function renderStrengthBar(container, key, scoreValue) {
 
 
 // --- Render Resume Preview from Analysis (Left Side - Analyzer) ---
+// ... (rest of your renderUploadedResumePreview function) ...
 function renderUploadedResumePreview(analysisData) {
     console.log("Inside renderUploadedResumePreview");
     const previewContainer = document.getElementById('analyzer-resume-preview');
@@ -1187,6 +1274,7 @@ function renderUploadedResumePreview(analysisData) {
 
 
 // --- Helper Functions ---
+// ... (rest of your helper functions: getScoreClass, etc.) ...
 function getScoreClass(score) {
     if (score >= 85) return 'high-score';
     if (score >= 70) return 'medium-score';
@@ -1219,6 +1307,7 @@ function getSuggestionIconClassAndSymbol(type, text) {
 }
 
 // --- Button Actions ---
+// ... (rest of your button action code) ...
 const downloadAnalysisBtn = document.getElementById('download-analysis');
 const editResumeBtn = document.getElementById('edit-resume');
 const improveResumeBtn = document.getElementById('improve-resume');
@@ -1370,6 +1459,7 @@ if (improveResumeBtn) {
 
 
 // --- Toast Notification ---
+// ... (rest of your showToast function and close button listener) ...
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     if (!toast) return;
