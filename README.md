@@ -115,7 +115,7 @@ Follow these simple steps to set up the project on your machine:
 
 ## 📜 License
 
-This project is open-source and available under the [MIT License](LICENSE). *(You may need to create a LICENSE file containing the MIT License text)*
+This project is open-source and available under the [MIT License](LICENSE). 
 
 ---
 
@@ -125,3 +125,9 @@ This project is open-source and available under the [MIT License](LICENSE). *(Yo
 *   All the open-source libraries and frameworks that made development faster and easier!
 
 ---
+
+
+## 📬 Contact
+Made by Rohan Singh Rajput
+📫 [Gmail](rohan7999singh@gmail.com) | [LinkedIn](https://www.linkedin.com/in/rohan-singh-rajput-9ba442266/) | [GitHub](https://github.com/RohanRajput0048)
+
