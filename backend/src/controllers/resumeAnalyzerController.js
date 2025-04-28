@@ -91,7 +91,7 @@ ${resumeText}
 🧩 JSON Structure Template (use exactly this structure):
 
 {
-  "score": 0, /* Overall match score (0-100) based on skills, experience relevance to JD */
+  "score": 0, /* Overall match ATS score (0-100) based on skills, experience relevance to JD */
   "summaryFeedback": "", /* Concise feedback on resume summary quality and JD alignment */
   "skillsFeedback": "", /* Evaluation of skills relevance to JD requirements */
   "experienceFeedback": "", /* Evaluation of experience relevance and impact related to JD */
@@ -143,6 +143,7 @@ IMPORTANT INSTRUCTIONS:
 - Populate ALL fields in the template. Use "" or [] for missing data. Do not omit keys.
 - **Extract ALL distinct projects mentioned in the resume into the "projects" array.**
 - Extract the summary form the resume uploaded or generate a summary if not present.
+- ATS Score and sectionAnalysis should be scored on the basis of JD provided.
 `;
 
 
